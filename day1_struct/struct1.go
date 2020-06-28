@@ -63,7 +63,7 @@ func structtest6()  {
 	var p6 People=new(People)
 	p6.Username = "mengzi"
 	p6.Age = 1900
-	fmt.Println(p6.Username,p6.Age) 
+	fmt.Println(p6.Username,p6.Age)  // 报错 cannot use new(People) (type *People) as type People in assignmentgo
 }
 
 
