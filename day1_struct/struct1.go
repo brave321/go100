@@ -60,11 +60,17 @@ func structtest5()  {
 }
 
 func structtest6()  {
-	var p6 People=new(People)
-	p6.Username = "mengzi"
+	var p6 =new(People) // 使用 new 得到的是一个类型的指针 
+	p6.Username = "mengzi" 
 	p6.Age = 1900
 	fmt.Println(p6.Username,p6.Age)  // 报错 cannot use new(People) (type *People) as type People in assignmentgo
 }
+
+// struct 内存布局 // 结构体的内存布局：占用一段连续的内存空间
+
+// 结构体没有构造函数，必要的时候需要自己实现
+
+
 
 
 
@@ -75,5 +81,5 @@ func main()  {
 	// structtest3() 
 	// structtest4()
 	// structtest5()
-	structtest6()
+	// structtest6()
 }
