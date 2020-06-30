@@ -1,6 +1,33 @@
 package main
 import "fmt"
 
+
+func min(a ...int) int  {
+	if len(a)==0{
+		return 0
+	}
+	min :=a[0]
+	for _,v :=range a {
+		if v<min{
+			min=v
+		}
+	}
+	return min
+}
+
+
+
 func main()  {
-	fmt.Println("hello go")
+  x :=min(1,3,2,0)
+  fmt.Printf("The minimum is: %d\n",x)
+  arr :=[]int{7,9,35,1}
+  x = min(arr...)
+  fmt.Printf("The minimum in the array arr is: %d", x)
+
+  // 输出值为
+//   The minimum is: 0
+// The minimum in the array arr is: 1
+
+
+
 }
