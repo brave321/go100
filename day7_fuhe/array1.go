@@ -60,12 +60,33 @@ func arraytest3(num [5]int) {
 
 }
 
+//数组的长度
+
+func arraytest4() {
+	a := [...]float64{1.4, 4.5, 5.94, 3.85}
+	fmt.Println("length of a is", len(a))
+
+	// 数组的遍历
+	for i := 0; i < len(a); i++ {
+		fmt.Printf("%d the element of a is %.2f\n", i, a[i])
+	}
+
+	fmt.Println("使用range 遍历函数")
+	// 使用range 函数遍历
+	sum := float64(0)
+	for i, v := range a {
+		fmt.Printf("%d the element of a is %.2f\n", i, v)
+		sum += v
+	}
+	fmt.Println("\nsum of all elements of a", sum)
+}
+
 func main() {
 	// arraytest1()
 	// arraytest2()
-	num := [...]int{1, 4, 5, 567, 9}
-	fmt.Println("before passing to function ", num)
-	arraytest3(num)
-	fmt.Println("after passing to function ", num) // num 数组不会因为调用而改变
-
+	// num := [...]int{1, 4, 5, 567, 9}
+	// fmt.Println("before passing to function ", num)
+	// arraytest3(num)
+	// fmt.Println("after passing to function ", num) // num 数组不会因为调用而改变
+	arraytest4()
 }
