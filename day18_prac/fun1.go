@@ -2,44 +2,204 @@ package main
 
 import "fmt"
 
-// 练习 7.12
+// map 的声明和初始化
 
-// 编写一个函数，要求其接受两个参数，原始字符串 str 和分割索引 i，然后返回两个分割后的字符串。
+// map 是引用类型
 
-func test1(a int, b int) int {
+// var map1 map[keytype][valuetype]
+// var map2 map[string]int
+
+// 示例
+
+func map1() {
+	var mapLit map[string]int
+
+	var mapAssigned map[string]int
+
+	fmt.Println(mapLit, "====", mapAssigned)
+
+	mapLit = map[string]int{"one": 1, "two": 2}
+
+	mapCreated := make(map[string]float32)
+
+	mapAssigned = mapLit
+
+	fmt.Println("===", mapLit, "==", mapCreated, "==", mapAssigned)
+
+	// map 元素添加 ,key 里面的是双引号
+
+	mapCreated["key1"] = 43.6
+	mapCreated["key2"] = 24.6
+	mapCreated["key3"] = 14.6
+	mapCreated["key4"] = 44.63
+
+	//根据key 值获取元素值
+
+	// fmt.Println(mapLit["one"])
+	fmt.Printf("Map liter one is %d\n", mapLit["one"])
+	fmt.Printf("Map mapCreated one is %f\n", mapCreated["key1"])
+	// 输出 Map mapCreated one is 43.599998
+	// 获取不存在的元素 为
+	fmt.Printf("Map mapCreated one is %f\n", mapCreated["key10"])
+	// 输出Map mapCreated one is 0.000000
+
+	// 循环遍历 map 中的元素
+
+	for k, v := range mapCreated {
+		// fmt.Println(k, v)
+		fmt.Printf("the key is: %s value is %f\n", k, v)
+		// 输出
+		// 		the key is: key1 value is 43.599998
+		// the key is: key2 value is 24.600000
+		// the key is: key3 value is 14.600000
+		// the key is: key4 value is 44.630001
+
+	}
 
 }
 
-// 练习 7.13
+// map 的数值可以是任意类型的 // map 的值是函数
 
-// 假设有字符串 str，那么 str[len(str)/2:] + str[:len(str)/2] 的结果是什么？
+func map2() {
+	mf := map[int]func() int{
+		1: func() int { return 10 },
+		2: func() int { return 20 },
+		5: func() int { return 50 },
+	}
+	fmt.Println(mf)
+}
 
-// 练习 7.14
+// map 容量
 
-// 编写一个程序，要求能够反转字符串，即将 “Google” 转换成 “elgooG”（提示：使用 []byte 类型的切片）。
+// // map 的值可以根据key，value 动态伸缩，也可以选择标明 初始容量
+// 如 map2 := make(map[string]float32, 100)
 
-// 如果您使用两个切片来实现反转，请再尝试使用一个切片（提示：使用交换法）。
+// 用切片作为 map 的值
 
-// 如果您想要反转 Unicode 编码的字符串，请使用 []int32 类型的切片。
+//mp1 := make(map[int][]int)
 
-// 练习 7.15
+// val1 = map1[key1] 的方法获取 key1 对应的值 val1。如果 map 中不存在 key1，val1 就是一个值类型的空值。
+// 为了解决这个问题，我们可以这么用：val1, isPresent = map1[key1]
+//  如果你只是想判断某个 key 是否存在而不关心它对应的值到底是多少，你可以这么做：
 
-// 编写一个程序，要求能够遍历一个数组的字符，并将当前字符和前一个字符不相同的字符拷贝至另一个数组。
+// if _, ok := map1[key1]; ok {
+//     // ...
+// }
 
-// 练习 7.16
+// map 删除元素  delete(map1, key1) 就可以s
 
-// 编写一个程序，使用冒泡排序的方法排序一个包含整数的切片（算法的定义可参考 维基百科）。
+func map3() {
+	var mapLit map[string]int
+	mapLit = map[string]int{"one": 1, "two": 2}
 
-// 练习 7.17
+	for k, v := range mapLit {
+		if _, ok := mapLit[k]; ok { // 判断元素如果有的话就输出
 
-// 在函数式编程语言中，一个 map-function 是指能够接受一个函数原型和一个列表，并使用列表中的值依次执行函数原型，公式为：map ( F(), (e1,e2, . . . ,en) ) = ( F(e1), F(e2), ... F(en) )。
+			fmt.Printf("the key is %s ,the value is %d\n", k, v)
+		}
 
-// 编写一个函数 mapFunc 要求接受以下 2 个参数：
+	}
 
-// 一个将整数乘以 10 的函数
-// 一个整数列表
-// 最后返回保存运行结果的整数列表
+	// 增加元素
+
+	mapLit["three"] = 3
+	mapLit["four"] = 4
+
+	fmt.Println(mapLit)
+
+	// 删除元素
+	delete(mapLit, "four")
+
+	fmt.Println(mapLit)
+
+	// 输出结果
+	// the key is one ,the value is 1
+	// the key is two ,the value is 2
+	// map[four:4 one:1 three:3 two:2]
+	// map[one:1 three:3 two:2]
+
+}
+
+func map4() {
+	var value int
+	var isPresent bool
+	map1 := make(map[string]int, 0)
+	map1["New Delhi"] = 55
+	map1["Beijing"] = 20
+	map1["Washington"] = 25
+	value, isPresent = map1["Beijing"]
+	if isPresent {
+		fmt.Printf("the value of \"Beijing\" in map1 is:%d\n", value)
+	} else {
+		fmt.Printf("map1 does not contain Beijing")
+	}
+	value, isPresent = map1["Paris"]
+	fmt.Printf("Is \"Paris\" in map1 ?:%t\n", isPresent)
+	fmt.Printf("Value is: %d\n", value)
+
+	delete(map1, "Washington")
+	if isPresent {
+		fmt.Printf("The value of \"Washington\" in map1 is: %d\n", value)
+	} else {
+		fmt.Println("map1 does not contain Washington")
+	}
+
+	// 输出
+
+	// 	the value of "Beijing" in map1 is:20
+	// Is "Paris" in map1 ?:false
+	// Value is: 0
+	// map1 does not contain Washington
+
+}
+
+//打印
+
+func map5() {
+
+	// var mapLit map[string]int
+	// mapLit = map[string]int{"one": 1, "two": 2}
+	// var value string
+	var isPresent bool
+
+	var map1 map[string]string
+
+	map1 = map[string]string{"1": "Monday", "2": "Tuesday", "3": "Wednesday", "4": "Thursday", "5": "Friday", "6": "Saturday", "7": "Sunday"}
+	fmt.Println(map1, isPresent)
+
+	// value, isPresent = map1["Tuesday"]
+	// if isPresent {
+	// 	fmt.Printf("the value of \"Tuesday\" in map1 is: %d\n", value)
+	// } else {
+	// 	fmt.Println("map1 dose not container Tuesday ")
+	// }
+
+	//
+	// fmt.Println("==========================")
+
+	// value, isPresent = map1["Thursday"]
+	// if isPresent {
+	// 	fmt.Printf("the value of \"Thursday\" in map1 is: %d\n", value)
+	// } else {
+	// 	fmt.Println("map1 dose not container Thursday ")
+	// }
+
+	// value, isPresent = map1["Tuesday"]
+
+	// value, isPresent = map1["Tuesday"]
+	// if isPresent {
+	// 	fmt.Printf("the value of \"Tuesday\" in map1 is:%d\n", value)
+	// } else {
+	// 	fmt.Printf("map1 does not contain Tuesday")
+	// }
+}
 
 func main() {
 	fmt.Println("hello world")
+	// map1()
+	// mapCreated()
+	// map2()
+	// map3()
+	// map4()
+	map5()
 }
