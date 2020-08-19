@@ -44,6 +44,17 @@ func main() {
 	// The string is:Chris
 	// &{10 15.4 Chris}
 
+ // struct 例子
+
+ 
+
+
+
+
+
+
+
+
 	
 
 }
