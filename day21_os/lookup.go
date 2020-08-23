@@ -8,6 +8,7 @@ import (
 
 // LookupEnv 检查环境变量
 func main() {
+	fmt.Println(os.Getwd())
 	key := "DB_CONN"
 	os.Setenv(key, "DB_CONN")
 	connStr, ex := os.LookupEnv(key)
@@ -16,3 +17,4 @@ func main() {
 	}
 	fmt.Println(connStr)
 }
+x
